@@ -1,0 +1,21 @@
+{
+  "name": "sp-auth-puppeteer-sample",
+  "version": "1.0.0",
+  "main": "./build/main.js",
+  "scripts": {
+    "start": "tsc && node ./build/conf && node ./build/main",
+    "auth": "tsc && node ./build/conf"
+  },
+  "dependencies": {
+    "@types/node": "^10.11.5",
+    "node-sp-auth": "^2.5.6",
+    "puppeteer": "^1.9.0",
+    "ts-node": "^7.0.1",
+    "tslint": "^5.11.0",
+    "tslint-config-standard": "^8.0.1",
+    "typescript": "^3.1.1"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^1.9.0"
+  }
+}
