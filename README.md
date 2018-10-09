@@ -51,12 +51,12 @@ let browser: puppeteer.Browser = null;
     waitUntil: 'networkidle2'
   });
 
-  /* Here comes puppeteer logic: UI tests, screenshots, etc. */
+  /* Here comes Puppeteer logic: UI tests, screenshots, etc. */
 
   // Save a screenshot of SharePoint page as PDF
   await page.pdf({ path: 'sp.pdf', format: 'A4' });
 
-  // For other goodies check for Pupeteer API:
+  // For other goodies check for Puppeteer API:
   // https://github.com/GoogleChrome/puppeteer/blob/v1.9.0/docs/api.md
 
   await browser.close();
