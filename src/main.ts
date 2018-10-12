@@ -3,13 +3,20 @@ import { authPuppeteer } from './auth';
 
 (async () => {
 
-  const browser = await puppeteer.launch();
+  const width = 1280;
+  const height = 900;
+
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: [ `--window-size=${width},${height}` ]
+  });
 
   try {
 
     const page = await browser.newPage();
     const siteUrl = await authPuppeteer(page);
 
+    await page.setViewport({ width, height });
     await page.goto(siteUrl, { waitUntil: 'networkidle2' });
 
     /* Here comes puppeteer logic: UI tests, screenshots, etc. */
