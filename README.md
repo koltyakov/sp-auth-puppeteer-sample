@@ -45,9 +45,7 @@ import { authPuppeteer } from './auth';
   const siteUrl = await authPuppeteer(page);
   // Since this time page is authenticated in SharePoint
 
-  await page.goto(siteUrl, {
-    waitUntil: 'networkidle2'
-  });
+  await page.goto(siteUrl, { waitUntil: 'networkidle2' });
 
   /* Here comes Puppeteer logic: UI tests, screenshots, etc. */
 
