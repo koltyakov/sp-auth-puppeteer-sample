@@ -1,31 +1,28 @@
 import * as puppeteer from 'puppeteer';
 import { authPuppeteer } from './auth';
 
-let browser: puppeteer.Browser = null;
-
 (async () => {
 
-  browser = await puppeteer.launch();
-  const page = await browser.newPage();
-  const siteUrl = await authPuppeteer(page);
+  const browser: puppeteer.Browser = await puppeteer.launch();
 
-  await page.goto(siteUrl);
+  try {
 
-  /* Here comes puppeteer logic: UI tests, screenshots, etc. */
+    const page = await browser.newPage();
+    const siteUrl = await authPuppeteer(page);
 
-  // Create site page screenshot
-  // await page.waitFor(3000);
-  // await page.screenshot({ path: 'example.png' });
+    await page.goto(siteUrl);
 
-  const pageTitle = await page.title();
-  console.log('Page title:', pageTitle);
+    /* Here comes puppeteer logic: UI tests, screenshots, etc. */
 
-  await browser.close();
+    // Create site page screenshot
+    // await page.waitFor(3000);
+    // await page.screenshot({ path: 'example.png' });
 
-})()
-  .catch(error => {
-    try {
-      browser.close();
-    } catch (ex) { /**/ }
-    console.error(error);
-  });
+    const pageTitle = await page.title();
+    console.log('Page title:', pageTitle);
+
+  } catch { /**/ } finally {
+    await browser.close();
+  }
+
+})();

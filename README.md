@@ -38,11 +38,9 @@ Should start the Puppeteer (in headless mode) authenticated to SharePoint with [
 import * as puppeteer from 'puppeteer';
 import { authPuppeteer } from './auth';
 
-let browser: puppeteer.Browser = null;
-
 (async () => {
 
-  browser = await puppeteer.launch();
+  const browser = await puppeteer.launch();
   const page = await browser.newPage();
   const siteUrl = await authPuppeteer(page);
   // Since this time page is authenticated in SharePoint
