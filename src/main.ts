@@ -1,4 +1,5 @@
 import * as puppeteer from 'puppeteer';
+import * as fs from 'fs';
 import { authPuppeteer } from './auth';
 
 (async () => {
@@ -23,6 +24,9 @@ import { authPuppeteer } from './auth';
 
     // Create site page screenshot
     await page.waitFor(3000);
+    if (!fs.existsSync('./tmp')) {
+      fs.mkdirSync('./tmp');
+    }
     await page.screenshot({ path: './tmp/example.png' });
 
     const pageTitle = await page.title();
