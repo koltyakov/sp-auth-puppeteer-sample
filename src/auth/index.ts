@@ -1,9 +1,9 @@
 import { Page } from 'puppeteer';
 import { getAuth, IOnpremiseUserCredentials } from 'node-sp-auth';
-import { AuthConfig, IAuthContext } from 'node-sp-auth-config';
+import { AuthConfig } from 'node-sp-auth-config';
 
 export const authPuppeteer = async (page: Page): Promise<string> => {
-  const authContext: IAuthContext = await new AuthConfig().getContext();
+  const authContext = await new AuthConfig().getContext();
 
   if (authContext.strategy !== 'OnpremiseUserCredentials') {
 

@@ -48,6 +48,8 @@ import { authPuppeteer } from './auth';
     // });
     // console.log('Links on page:', links.join(', '));
 
+  } catch (ex) {
+    console.log(`Error: ${ex.message}`);
   } finally {
     await browser.close();
   }

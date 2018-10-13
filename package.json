@@ -3,19 +3,22 @@
   "version": "1.0.0",
   "main": "./build/main.js",
   "scripts": {
-    "start": "tsc && node ./build/conf && node ./build/main",
-    "auth": "tsc && node ./build/conf"
+    "start": "node ./build/utils/conf && node ./build/main",
+    "start:interactive": "node ./build/utils/conf && node ./build/interactive",
+    "auth": "node ./build/utils/conf",
+    "build": "rimraf ./build && tsc -p ."
   },
   "dependencies": {
-    "@types/node": "^10.11.5",
     "node-sp-auth": "^2.5.6",
-    "puppeteer": "^1.9.0",
+    "puppeteer": "^1.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^10.11.5",
+    "@types/puppeteer": "^1.9.0",
+    "rimraf": "^2.6.2",
     "ts-node": "^7.0.1",
     "tslint": "^5.11.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.1.1"
-  },
-  "devDependencies": {
-    "@types/puppeteer": "^1.9.0"
+    "typescript": "^3.1.3"
   }
 }
