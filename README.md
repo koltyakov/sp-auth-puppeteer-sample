@@ -30,13 +30,23 @@ Auth options are stored in `./config/private.json`
 
 See more [here](https://github.com/koltyakov/node-sp-auth-config).
 
-## Run
+## Run: sp-auth mechanism
 
 ```bash
 npm run start
 ```
 
 Should start the Puppeteer (in headless mode) authenticated to SharePoint with [node-sp-auth](https://github.com/s-KaiNet/node-sp-auth).
+
+## Run: interactive auth and O365 automation
+
+```bash
+npm run start:interactive
+```
+
+Interactive mode emulates user credentials input which let us navigate to any Office 365 section, e.g. Central Administration, etc., and run some UI automation or testing.
+
+E.g., `./src/interactive` script outputs a list of surveys and a number of responses from MS Forms.
 
 ## Sample
 

@@ -1,10 +1,9 @@
 import * as puppeteer from 'puppeteer';
-import * as fs from 'fs';
-import * as path from 'path';
 import { authInteractively } from './auth/o365';
 
 (async () => {
 
+  // Optional viewport size declaration
   const width = 1920;
   const height = 1080;
 
@@ -16,7 +15,12 @@ import { authInteractively } from './auth/o365';
   try {
 
     const page = await browser.newPage();
+
+    // Resource in O365 to navigate to
+    // The sample demonstrates MS Forms automation
     const resourceUrl = 'https://forms.office.com/Pages/DesignPage.aspx';
+
+    // Initiate interactive auth
     await authInteractively(page);
 
     await page.setViewport({ width, height });
@@ -26,9 +30,11 @@ import { authInteractively } from './auth/o365';
 
     /* Here comes puppeteer logic: UI tests, screenshots, etc. */
 
+    // Print page title
     const pageTitle = await page.title();
     console.log('Page title:', pageTitle);
 
+    // Close intro dialog in MS Forms
     const intro = await page.evaluate(() => {
       return document.querySelector('.form-introduction-dialog-close-button') !== null;
     });
@@ -36,6 +42,7 @@ import { authInteractively } from './auth/o365';
       await page.click('.form-introduction-dialog-close-button');
     }
 
+    // Retrieve a list of surveys and quizes (visible on a page) and responses counter
     const surveys = await page.evaluate(() => {
       return Array.from(document.querySelectorAll('.button-content'))
         .filter(el => el.querySelector('.fl-title') !== null)
@@ -46,7 +53,6 @@ import { authInteractively } from './auth/o365';
           };
         });
     });
-
     console.log(surveys);
 
   } catch (ex) {

@@ -5,6 +5,7 @@ import { authPuppeteer } from './auth';
 
 (async () => {
 
+  // Optional window and viewport dimentions config
   const width = 1920;
   const height = 1080;
 
@@ -16,6 +17,8 @@ import { authPuppeteer } from './auth';
   try {
 
     const page = await browser.newPage();
+
+    // Call for sp-auth, authentication cookies inject mechanism initialization
     const siteUrl = await authPuppeteer(page);
 
     await page.setViewport({ width, height });
@@ -35,9 +38,11 @@ import { authPuppeteer } from './auth';
       path: path.join(dir, `${filename}.png`)
     });
 
+    // Print page title
     const pageTitle = await page.title();
     console.log('Page title:', pageTitle);
 
+    // Print anchor tags links
     // const links = await page.$$eval('a', links => {
     //   return links.map(link => link.getAttribute('href'))
     //     .filter(href => {
