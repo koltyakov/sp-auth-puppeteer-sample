@@ -9,6 +9,8 @@ import { authPuppeteer } from './auth';
   const width = 1920;
   const height = 1080;
 
+  console.time('Execution time');
+
   const browser = await puppeteer.launch({
     headless: true,
     args: [ `--window-size=${width},${height}` ]
@@ -58,5 +60,7 @@ import { authPuppeteer } from './auth';
   } finally {
     await browser.close();
   }
+
+  console.timeEnd('Execution time');
 
 })();
