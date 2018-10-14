@@ -3,10 +3,11 @@
   "version": "1.0.0",
   "main": "./build/main.js",
   "scripts": {
-    "start": "node ./build/utils/conf && node ./build/main",
-    "start:interactive": "node ./build/utils/conf && node ./build/interactive",
+    "start": "npm run auth && node ./build/main",
+    "start:interactive": "npm run auth && node ./build/interactive",
     "auth": "node ./build/utils/conf",
-    "build": "rimraf ./build && tsc -p ."
+    "tslint": "tslint 'src/**/*.{ts,tsx}'",
+    "build": "rimraf ./build && npm run tslint && tsc -p ."
   },
   "dependencies": {
     "node-sp-auth": "^2.5.6",

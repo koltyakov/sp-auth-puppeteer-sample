@@ -36,6 +36,12 @@ See more [here](https://github.com/koltyakov/node-sp-auth-config).
 npm run start
 ```
 
+or
+
+```bash
+ts-node ./src/main.ts
+```
+
 Should start the Puppeteer (in headless mode) authenticated to SharePoint with [node-sp-auth](https://github.com/s-KaiNet/node-sp-auth).
 
 ## Run: interactive auth and O365 automation
@@ -44,9 +50,15 @@ Should start the Puppeteer (in headless mode) authenticated to SharePoint with [
 npm run start:interactive
 ```
 
+or
+
+```bash
+ts-node ./src/interactive.ts
+```
+
 Interactive mode emulates user credentials input which let us navigate to any Office 365 section, e.g. Central Administration, etc., and run some UI automation or testing.
 
-E.g., `./src/interactive` script outputs a list of surveys and a number of responses from MS Forms.
+E.g., [./src/interactive](./src/interactive.ts) script outputs a list of surveys and a number of responses from MS Forms.
 
 ## Sample
 
