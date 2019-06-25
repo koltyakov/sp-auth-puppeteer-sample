@@ -85,5 +85,6 @@ import { authPuppeteer } from './auth';
 
   await browser.close();
 
-})();
+})()
+  .catch(console.warn);
 ```
