@@ -3,19 +3,21 @@
   "version": "1.0.0",
   "main": "./build/main.js",
   "scripts": {
-    "start": "tsc && node ./build/conf && node ./build/main",
-    "auth": "tsc && node ./build/conf"
+    "start": "tsc -p . && node ./build/main",
+    "auth": "tsc -p . && node ./build/conf"
   },
   "dependencies": {
-    "@types/node": "^10.11.5",
-    "node-sp-auth": "^2.5.6",
-    "puppeteer": "^1.9.0",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
+    "@types/node": "^12.0.10",
+    "minimist": "^1.2.0",
+    "node-sp-auth": "^2.5.7",
+    "puppeteer": "^1.18.0",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.1.1"
+    "typescript": "^3.5.2"
   },
   "devDependencies": {
-    "@types/puppeteer": "^1.9.0"
+    "@types/minimist": "^1.2.0",
+    "@types/puppeteer": "^1.12.4"
   }
 }

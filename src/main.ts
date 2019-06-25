@@ -1,7 +1,11 @@
 import * as puppeteer from 'puppeteer';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as minimist from 'minimist';
+
 import { authPuppeteer } from './auth';
+
+const args = minimist(process.argv.slice(2));
 
 (async () => {
 
@@ -16,7 +20,7 @@ import { authPuppeteer } from './auth';
   try {
 
     const page = await browser.newPage();
-    const siteUrl = await authPuppeteer(page);
+    const siteUrl = await authPuppeteer(page, args['configPath']);
 
     await page.setViewport({ width, height });
     await page.goto(siteUrl, {
@@ -52,4 +56,5 @@ import { authPuppeteer } from './auth';
     await browser.close();
   }
 
-})();
+})()
+  .catch(console.warn);

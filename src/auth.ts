@@ -2,13 +2,13 @@ import { Page } from 'puppeteer';
 import { getAuth, IOnpremiseUserCredentials } from 'node-sp-auth';
 import { AuthConfig, IAuthContext } from 'node-sp-auth-config';
 
-export const authPuppeteer = async (page: Page): Promise<string> => {
-  const authContext: IAuthContext = await new AuthConfig().getContext();
+export const authPuppeteer = async (page: Page, configPath: string = './config/private.json'): Promise<string> => {
+  const authContext: IAuthContext = await new AuthConfig({ configPath }).getContext();
 
   if (authContext.strategy !== 'OnpremiseUserCredentials') {
 
     // Authenticates to SharePoint with `node-sp-auth` library
-    const auth = await getAuth(authContext.siteUrl, authContext.authOptions);
+    const auth = await Promise.resolve(getAuth(authContext.siteUrl, authContext.authOptions));
     const url = authContext.siteUrl + '/';
 
     // Processing auth cookies
