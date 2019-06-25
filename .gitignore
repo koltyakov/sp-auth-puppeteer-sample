@@ -1,4 +1,5 @@
-/node_modules
-/build
-/screens
+node_modules/
+build/
+screens/
+src/draft/
 private*

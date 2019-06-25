@@ -5,6 +5,7 @@ import { AuthConfig, IAuthContext } from 'node-sp-auth-config';
 export const authPuppeteer = async (page: Page, configPath: string = './config/private.json'): Promise<string> => {
   const authContext: IAuthContext = await new AuthConfig({ configPath }).getContext();
 
+  // OnpremiseUserCredentials == NTML can't operate with cookies
   if (authContext.strategy !== 'OnpremiseUserCredentials') {
 
     // Authenticates to SharePoint with `node-sp-auth` library
@@ -18,9 +19,6 @@ export const authPuppeteer = async (page: Page, configPath: string = './config/p
       const value = c.substring(index + 1, c.length);
       return { url, name, value };
     });
-
-    // Auth cookies
-    // console.log(cookies);
 
     // Setting cookies to the session
     await page.setCookie(...cookies);
