@@ -1,32 +1,33 @@
 {
   "name": "sp-auth-puppeteer-sample",
   "version": "1.0.0",
+  "private": true,
   "main": "./build/main.js",
   "scripts": {
     "start": "npm run auth && node ./build/main",
     "start:interactive": "npm run auth && node ./build/interactive",
     "auth": "node ./build/utils/conf",
-    "tslint": "tslint 'src/**/*.{ts,tsx}'",
-    "build": "rimraf ./build && npm run tslint && tsc -p ."
+    "lint": "tslint -p . 'src/**/*.{ts,tsx}'",
+    "build": "rimraf ./build && npm run lint && tsc -p ."
   },
   "dependencies": {
-    "@types/node": "^12.0.10",
+    "@types/node": "^12.12.5",
     "minimist": "^1.2.0",
     "node-sp-auth": "^2.5.7",
-    "puppeteer": "^1.18.0",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
+    "puppeteer": "^2.0.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.5.2"
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "@types/minimist": "^1.2.0",
-    "@types/puppeteer": "^1.12.4",
-    "@types/node": "^10.11.5",
-    "rimraf": "^2.6.2",
-    "ts-node": "^7.0.1",
-    "tslint": "^5.11.0",
+    "@types/puppeteer": "^1.20.2",
+    "@types/node": "^12.12.5",
+    "rimraf": "^3.0.0",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
     "tslint-config-standard": "^8.0.1",
-    "typescript": "^3.1.3"
+    "typescript": "^3.6.4"
   }
 }
