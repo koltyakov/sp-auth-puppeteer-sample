@@ -1,9 +1,10 @@
 import { Page } from 'puppeteer';
 import { getAuth, IOnpremiseUserCredentials } from 'node-sp-auth';
-import { AuthConfig, IAuthContext } from 'node-sp-auth-config';
+import { AuthConfig, IAuthConfigSettings, IAuthContext } from 'node-sp-auth-config';
 
-export const authPuppeteer = async (page: Page, configPath: string = './config/private.json'): Promise<string> => {
-  const authContext: IAuthContext = await new AuthConfig({ configPath }).getContext();
+export const authPuppeteer = async (page: Page, configPath: string = './config/private.json', headlessMode: boolean = false): Promise<string> => {
+  const authConfig: IAuthConfigSettings = { configPath, headlessMode };
+  const authContext: IAuthContext = await new AuthConfig(authConfig).getContext();
 
   // OnpremiseUserCredentials == NTML can't operate with cookies
   if (authContext.strategy !== 'OnpremiseUserCredentials') {

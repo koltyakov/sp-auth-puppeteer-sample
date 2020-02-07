@@ -3,3 +3,4 @@ build/
 screens/
 src/draft/
 private*
+.env
