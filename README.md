@@ -93,9 +93,9 @@ import { authPuppeteer } from './auth';
 
 In CI environment configure [SPAuth variables](https://github.com/koltyakov/node-sp-auth-config#environment-variables). E.g.:
 
-SPAUTH_SITEURL=https://contoso.sharepoint.com/sites/my-site
-SPAUTH_USERNAME=username@contoso.onmicrosoft.com
-SPAUTH_PASSWORD=secret
+- SPAUTH_SITEURL=https://contoso.sharepoint.com/sites/my-site
+- SPAUTH_USERNAME=username@contoso.onmicrosoft.com
+- SPAUTH_PASSWORD=secret
 
 Clone the sample:
 
