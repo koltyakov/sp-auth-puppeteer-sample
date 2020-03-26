@@ -1,11 +1,19 @@
 import * as puppeteer from 'puppeteer';
-import * as fs from 'fs';
-import * as path from 'path';
 import * as minimist from 'minimist';
+import { config } from 'dotenv';
 
 import { authPuppeteer } from './auth';
 
-const args = minimist(process.argv.slice(2));
+interface IArgs {
+  headless?: boolean;
+  configPath?: string;
+  ci?: boolean;
+  scenarios?: string;
+}
+
+config(); // parse local .env if any
+const { headless, configPath, ci, scenarios: scenarios } = minimist(process.argv.slice(2)) as IArgs;
+if (ci) { process.env.SPAUTH_ENV = 'production'; }
 
 (async () => {
 
@@ -16,14 +24,14 @@ const args = minimist(process.argv.slice(2));
   console.time('Execution time');
 
   const browser = await puppeteer.launch({
-    headless: args['headless'] === 'false' ? false : true,
+    headless: typeof headless !== 'undefined' ? headless : true,
     args: [ `--window-size=${width},${height}` ]
   });
 
   try {
 
     const page = await browser.newPage();
-    const siteUrl = await authPuppeteer(page, args['configPath']);
+    const siteUrl = await authPuppeteer(page, configPath, ci);
 
     await page.setViewport({ width, height });
     await page.goto(siteUrl, {
@@ -32,30 +40,18 @@ const args = minimist(process.argv.slice(2));
 
     /* Here comes puppeteer logic: UI tests, screenshots, etc. */
 
-    // Create site page screenshot
-    const dir = './screens';
-    if (!fs.existsSync(dir)) {
-      fs.mkdirSync(dir);
+    const runScenarios = typeof scenarios === 'undefined'
+      ? ['getTitle', 'screenshot', 'links']
+      : scenarios.split(',').map((r) => r.trim());
+
+    for (const runPath of runScenarios) {
+      try {
+        const { run } = await import(`./cases/${runPath}`);
+        await run(page, siteUrl);
+      } catch (ex) {
+        console.log(`Error: ${ex.message}`);
+      }
     }
-    const filename = new Date().toISOString().replace(/(:|\.)/g, '_');
-    await page.screenshot({
-      path: path.join(dir, `${filename}.png`)
-    });
-
-    // Print page title
-    const pageTitle = await page.title();
-    console.log('Page title:', pageTitle);
-
-    // Print anchor tags links
-    // const links = await page.$$eval('a', links => {
-    //   return links.map(link => link.getAttribute('href'))
-    //     .filter(href => {
-    //       return href !== null &&
-    //         href.indexOf('#') !== 0 &&
-    //         href.indexOf('javascript:') !== 0;
-    //     });
-    // });
-    // console.log('Links on page:', links.join(', '));
 
   } catch (ex) {
     console.log(`Error: ${ex.message}`);

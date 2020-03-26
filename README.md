@@ -88,3 +88,32 @@ import { authPuppeteer } from './auth';
 })()
   .catch(console.warn);
 ```
+
+## CI Sample
+
+In CI environment configure [SPAuth variables](https://github.com/koltyakov/node-sp-auth-config#environment-variables). E.g.:
+
+- SPAUTH_SITEURL=https://contoso.sharepoint.com/sites/my-site
+- SPAUTH_USERNAME=username@contoso.onmicrosoft.com
+- SPAUTH_PASSWORD=secret
+
+Clone the sample:
+
+```bash
+git clone git@github.com:koltyakov/sp-auth-puppeteer-sample.git
+```
+
+Install dependencies and build:
+
+```bash
+npm ci
+npm run build
+```
+
+Run automation. E.g.:
+
+```bash
+node ./build/main --ci "--scenarios" "workbench,screenshot"
+```
+
+Embed approach into your favorite UI tests framework.
