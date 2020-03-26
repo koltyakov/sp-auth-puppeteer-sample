@@ -1,7 +1,12 @@
 {
-  "extends": "tslint-config-standard",
+  "extends": "tslint:latest",
   "rules": {
+    "quotemark": [true, "single", "jsx-double"],
     "semicolon": [true, "always", "ignore-interfaces"],
-    "strict-type-predicates": false
+    "no-string-literal": false,
+    "strict-type-predicates": false,
+    "no-console": false,
+    "trailing-comma": false,
+    "ordered-imports": false
   }
 }

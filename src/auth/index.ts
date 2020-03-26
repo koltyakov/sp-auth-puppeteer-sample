@@ -13,7 +13,7 @@ export const authPuppeteer = async (page: Page, configPath: string = './config/p
     const url = authContext.siteUrl + '/';
 
     // Processing auth cookies
-    const cookies = (auth.headers.Cookie || '').split('; ').map(c => {
+    const cookies = (auth.headers.Cookie || '').split('; ').map((c: string) => {
       const index = c.indexOf('=');
       const name = c.substring(0, index);
       const value = c.substring(index + 1, c.length);
